@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Manager</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="module" src="scripts.js" defer></script>
+    <script src="drag.js" defer></script>
+    <script src="todo.js" defer></script>
+</head>
+<body>
+    <div class="scroll-container">
+        <div id="mainWindow" class="container">
+            <header>
+                <h1>Проект</h1>
+            </header>
+            <main>
+                <div class="project-editor">
+                    <label for="projectNameTextBox">Название проекта</label>
+                    <input type="text" id="projectNameTextBox" class="input" placeholder="Введите название проекта">
+                </div>
+                <div class="project-actions">
+                    <button id="addProjectButton" class="button add">Создать проект</button>
+                </div>
+                <div id="projectsList" class="projects-list"></div>
+            </main>
+        </div>
+
+        <div id="projectModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button" id="closeProjectModal">&times;</span>
+                <label for="editProjectName">Название проекта</label>
+                <input type="text" id="editProjectName" class="input">
+                <label for="editProjectDescription">Описание проекта</label>
+                <textarea id="editProjectDescription" class="input edit-project-description" rows="4" placeholder="Введите описание проекта" style="resize: none; width: 438px; height: 120px;"></textarea>
+
+                <button id="saveChangesButton" class="button save">Сохранить изменения</button>
+            </div>
+        </div>
+
+        <div id="kanbanWindow" class="board" style="display:none;">
+            <div class="button-container">
+                <button id="backToProjectsButton" class="button back-to-projects">Вернуться к проектам</button>
+                <button id="add-lane-btn">Добавить колонку</button>
+                <button id="add-users-btn" class="button add-users">Добавить пользователей</button>
+                <button id="delete-users-btn" class="button delete-users">Удалить пользователей</button>
+            </div>
+            <div class="lanes" id="lanes"></div>
+
+            <div id="task-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-task-modal">&times;</span>
+                    <form id="task-form">
+                        <input type="hidden" id="task-id" />
+                        <label for="task-title">Title</label>
+                        <input type="text" id="task-title" required />
+                        <label for="task-desc">Description</label>
+                        <textarea id="task-desc" rows="4"></textarea>
+                        <label for="task-lane">Lane</label>
+                        <select id="task-lane"></select>
+                        <button id="taskcreate" type="submit">Save</button>
+                        <button type="button" id="delete-task-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="edit-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-edit-modal">&times;</span>
+                    <form id="edit-form">
+                        <input type="hidden" id="edit-task-id" />
+                        <label for="edit-task-title">Title</label>
+                        <input type="text" id="edit-task-title" required />
+                        <label for="edit-task-desc">Description</label>
+                        <textarea id="edit-task-desc" rows="4"></textarea>
+                        <label for="edit-task-lane">Lane</label>
+                        <select id="edit-task-lane"></select>
+                        <button id="edit-task-save" type="submit">Save</button>
+                        <button type="button" id="delete-edit-task-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="lane-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-lane-modal">&times;</span>
+                    <form id="lane-form">
+                        <input type="hidden" id="lane-id" />
+                        <label for="lane-title">Column Title</label>
+                        <input type="text" id="lane-title" required />
+                        <button id="groupcreate" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="name-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-name-modal">&times;</span>
+                    <form id="name-form">
+                        <input type="hidden" id="name-id" />
+                        <label for="name-title">Column Title</label>
+                        <input type="text" id="name-title" required />
+                        <button id="namecreate" type="submit">Save</button>
+                        <button type="button" id="delete-name-btn">Delete</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="users-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-users-modal">&times;</span>
+                    <form id="users-form">
+                        <input type="hidden" id="users-id" />
+                        <label for="users-title">Логин</label>
+                        <input type="text" id="users-title" required />
+                        <label for="users-roles">Роли</label>
+                        <select id="users-roles">
+                            <!-- Options for roles -->
+                        </select>
+                        <button id="adduserscreate" type="submit">Save</button>
+                    </form>
+                </div>
+            </div>
+
+            <div id="deleteusers-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close" id="close-deleteusers-modal">&times;</span>
+                    <form id="deleteusers-form">
+                        <input type="hidden" id="deleteusers-id" />
+                        <label for="deleteusers-roles">Пользователи</label>
+                        <select id="deleteusers-roles">
+                            <!-- Options for roles -->
+                        </select>
+                        <button type="button" id="cancel-deleteusers-btn">Удалить</button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
